@@ -1,0 +1,18 @@
+$CubicEaseIn: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+$CubicEaseOut: cubic-bezier(0.165, 0.84, 0.44, 1);
+$CubicEaseInOut: cubic-bezier(0.645, 0.045, 0.355, 1);
+$QuadEaseIn: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$QuadEaseOut: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$QuadEaseInOut: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+$ExpoEaseOut: cubic-bezier(0.19, 1, 0.22, 1);
+$ExpoEaseInOut: cubic-bezier(1, 0, 0, 1);
+
+.ReactCollapse--collapse {
+  transition: 500ms;
+  width: 100%;
+}
+
+.ReactCollapse--content {
+  padding: 0;
+  width: 100%;
+}

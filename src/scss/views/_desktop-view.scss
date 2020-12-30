@@ -1,0 +1,13 @@
+.admin-desktop-view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  background: $c-orange;
+  min-height: 100vh;
+  padding: 3rem 0;
+
+  .container {
+    width: 80%;
+  }
+}

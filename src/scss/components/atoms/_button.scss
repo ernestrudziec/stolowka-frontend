@@ -1,0 +1,22 @@
+.btn {
+  width: 100%;
+  max-width: 250px;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border: none;
+  }
+
+  &.btn-orange {
+    color: white;
+    background: $c-orange;
+    font-weight: 600;
+    font-size: 0.75rem;
+    margin: 2rem 0;
+    color: $c-dark-primary;
+  }
+}

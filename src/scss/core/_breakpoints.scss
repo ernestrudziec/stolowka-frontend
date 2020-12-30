@@ -1,0 +1,56 @@
+$screen-HVGA: 340px;
+$screen-VGA: 470px;
+$screen-PAL: 570px;
+$screen-vHD: 720px;
+$screen-XGA: 1020px;
+$screen-HD: 1240px;
+$screen-UXGA: 1590px;
+$screen-FHD: 1910px;
+
+@mixin HVGA {
+	@media screen and (min-width: $screen-HVGA) {
+		@content;
+	}
+}
+
+@mixin VGA {
+	@media screen and (min-width: $screen-VGA) {
+		@content;
+	}
+}
+
+@mixin PAL {
+	@media screen and (min-width: $screen-PAL) {
+		@content;
+	}
+}
+
+@mixin vHD {
+	@media screen and (min-width: $screen-vHD) {
+		@content;
+	}
+}
+
+@mixin XGA {
+	@media screen and (min-width: $screen-XGA) {
+		@content;
+	}
+}
+
+@mixin HD {
+	@media screen and (min-width: $screen-HD) {
+		@content;
+	}
+}
+
+@mixin UXGA {
+	@media screen and (min-width: $screen-UXGA) {
+		@content;
+	}
+}
+
+@mixin FHD {
+	@media screen and (min-width: $screen-FHD) {
+		@content;
+	}
+}

@@ -1,0 +1,120 @@
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $f-main !important;
+  font-size: 16px;
+
+  font-size: 0.8rem;
+
+  @include HVGA {
+    font-size: 1rem;
+  }
+
+  @include XGA {
+    font-size: 1.1rem;
+  }
+
+  @include HD {
+    font-size: 1.2rem;
+  }
+}
+
+.f-dark {
+  color: $c-dark-primary;
+}
+
+.f-white {
+  color: white;
+}
+
+.f-orange {
+  color: $c-orange;
+}
+
+.thin {
+  font-weight: 400;
+}
+
+.regular {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+p {
+  font-size: 1rem;
+}
+
+h1 {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 2.6rem;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: 1484px; //1240px
+}
+
+input {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.primary {
+    border: solid 2px $c-orange;
+    color: white;
+  }
+
+  &.secondary {
+    border: solid 2px $c-dark-primary;
+    color: $c-dark-primary;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-top: 1.5rem;
+
+  label {
+    margin-bottom: 1rem;
+    color: white;
+    font-size: 0.75rem;
+    font-family: $f-main;
+  }
+}
+
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

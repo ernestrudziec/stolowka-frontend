@@ -1,0 +1,22 @@
+.logo-stolowka {
+  margin: 0.5rem 0;
+  font-size: 2rem;
+
+  @include XGA {
+    font-size: 3rem;
+  }
+
+  .domain {
+    color: $c-orange;
+  }
+
+  .suffix {
+    color: white;
+  }
+
+  &.dark {
+    .suffix {
+      color: $c-dark-primary;
+    }
+  }
+}
