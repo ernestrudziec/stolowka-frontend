@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import addIconSVG from '../../../../assets/icons/add-icon.svg';
+import { GlobalContext } from '../../../context/context';
+import { MODALS } from '../../molecules/modals/modals';
 
 export default function AddTreeElementBar({ type }) {
   const getCopy = () => {
@@ -13,8 +15,16 @@ export default function AddTreeElementBar({ type }) {
     }
   };
 
+  const context = useContext(GlobalContext);
+
   return (
-    <div className={`element dark ${type.toLowerCase()}`}>
+    <div
+      onClick={(e) => {
+        e.stopPropagation();
+        context.setModal(MODALS[`ADD_${type}`]);
+      }}
+      className={`element dark ${type.toLowerCase()}`}
+    >
       <span>Dodaj {getCopy(type)}</span>
       <span>
         <img src={addIconSVG} className="icon" />

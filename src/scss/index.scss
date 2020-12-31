@@ -10,7 +10,11 @@
 @import 'components/atoms/button';
 @import 'components/atoms/preloader';
 
+@import 'components/molecules/form';
+
 @import 'components/organisms/tree';
+@import 'components/organisms/modal';
+@import 'components/organisms/modal-inner';
 
 @import 'views/guest-view';
 @import 'views/desktop-view';

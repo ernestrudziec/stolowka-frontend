@@ -3,14 +3,14 @@ import { useHistory } from 'react-router';
 import { ACTIONS } from '../actions/actions.js';
 import logout from '../helpers/logout';
 
-export const useAsync = (action, payload) => {
+export const useAsync = (action) => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(false);
   const [data, setData] = useState(null);
 
   const history = useHistory();
 
-  const execute = async () => {
+  const execute = async (payload) => {
     setStatus('pending');
 
     fetch(`${process.env.REACT_APP_API_URL + action.url}`, {
@@ -34,9 +34,9 @@ export const useAsync = (action, payload) => {
             .then((res) => res.json())
             .then((res) => {
               if (res.access) {
-                console.log('ACCESS GET');
+                // console.log('ACCESS GET');
                 sessionStorage.setItem('accessToken', res.access);
-                execute();
+                execute(payload);
               } else {
                 logout(history);
               }

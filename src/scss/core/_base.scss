@@ -11,6 +11,7 @@ body {
   padding: 0;
   font-family: $f-main !important;
   font-size: 16px;
+  background: $c-orange;
 
   font-size: 0.8rem;
 
@@ -76,45 +77,23 @@ h3 {
   max-width: 1484px; //1240px
 }
 
-input {
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-weight: 600;
-
-  &:focus {
-    outline: none;
-  }
-
-  &.primary {
-    border: solid 2px $c-orange;
-    color: white;
-  }
-
-  &.secondary {
-    border: solid 2px $c-dark-primary;
-    color: $c-dark-primary;
-  }
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  transition: 0.3s all;
 }
 
-.input-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-  margin-top: 1.5rem;
-
-  label {
-    margin-bottom: 1rem;
-    color: white;
-    font-size: 0.75rem;
-    font-family: $f-main;
-  }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $c-dark-primary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba($color: $c-dark-primary, $alpha: 0.9);
 }

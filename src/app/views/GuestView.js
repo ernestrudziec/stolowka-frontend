@@ -8,10 +8,7 @@ import { ACTIONS } from '../actions/actions';
 import { useHistory } from 'react-router-dom';
 
 export default function GuestView() {
-  const [login, loginStatus, loginError, loginData] = useAsync(ACTIONS.LOGIN_USER, {
-    username: 'admin',
-    password: 'haselkomaselko'
-  });
+  const [login, loginStatus, loginError, loginData] = useAsync(ACTIONS.LOGIN_USER);
 
   const history = useHistory();
 
@@ -51,7 +48,10 @@ export default function GuestView() {
                   type="submit"
                   onClick={(e) => {
                     e.preventDefault();
-                    login();
+                    login({
+                      username: 'admin',
+                      password: 'haselkomaselko'
+                    });
                   }}
                 >
                   ZALOGUJ SIĘ

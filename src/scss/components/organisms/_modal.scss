@@ -1,0 +1,81 @@
+.modal {
+  position: fixed;
+  z-index: 999999;
+  background: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  opacity: 0;
+  transition: 250ms;
+  padding: 2rem;
+  width: 90%;
+  height: 70vh;
+  max-width: 900px;
+  max-height: 600px;
+  padding-top: 3rem;
+  padding-left: 3rem;
+  transform-origin: center;
+
+  &:focus {
+    outline: none;
+  }
+
+  &_after-open {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: center;
+  }
+
+  &_before-close {
+    opacity: 0;
+  }
+
+  &:before {
+    position: absolute;
+    content: '';
+    background: $c-dark-primary;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1.5rem;
+  }
+
+  .close-btn {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 2rem;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.overlay {
+  z-index: 999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transition: opacity 400ms $CubicEaseInOut;
+  background: rgba(0, 0, 0, 0.75);
+  overflow-y: auto;
+  width: 100%;
+
+  &_after-open {
+    opacity: 1;
+  }
+
+  &_before-close {
+    opacity: 0;
+  }
+}

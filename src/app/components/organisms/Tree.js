@@ -4,9 +4,9 @@ import AddTreeElementBar from '../atoms/Tree/AddTreeElementBar';
 import TreeElementBar from '../atoms/Tree/TreeElementBar';
 
 const TreeElementGroup = ({ group, isBranchCollapsed }) => {
-  useEffect(() => {
-    console.log(group);
-  }, []);
+  // useEffect(() => {
+  //   console.log(group);
+  // }, []);
 
   return <TreeElementBar type={'GROUP'} name={group.name} />;
 };
@@ -14,9 +14,9 @@ const TreeElementGroup = ({ group, isBranchCollapsed }) => {
 const TreeElementUnit = ({ unit, isBranchCollapsed }) => {
   const [isOpened, setIsOpened] = useState(false);
 
-  useEffect(() => {
-    console.log(unit);
-  }, []);
+  // useEffect(() => {
+  //   console.log(unit);
+  // }, []);
 
   useEffect(() => {
     if (isBranchCollapsed === false) {

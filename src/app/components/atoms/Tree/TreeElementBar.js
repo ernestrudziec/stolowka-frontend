@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import expandIconSVG from '../../../../assets/icons/expand-icon.svg';
 import expandDoubleIconSVG from '../../../../assets/icons/expand-double-icon.svg';
 import removeIconSVG from '../../../../assets/icons/remove-icon.svg';
 import infoIconSVG from '../../../../assets/icons/info-icon.svg';
+import { GlobalContext } from '../../../context/context';
 
 export default function TreeElementBar({ name, type, onClick, isOpened }) {
   const getCopy = () => {
@@ -16,6 +17,8 @@ export default function TreeElementBar({ name, type, onClick, isOpened }) {
     }
   };
 
+  const context = useContext(GlobalContext);
+
   return (
     <div onClick={onClick} className={`element ${type.toLowerCase()}`}>
       <span className={`name ${type === 'GROUP' ? 'group' : ''}`}>{name}</span>
@@ -26,7 +29,14 @@ export default function TreeElementBar({ name, type, onClick, isOpened }) {
         />
       </span>
 
-      <img src={removeIconSVG} className="icon remove" />
+      <img
+        src={removeIconSVG}
+        onClick={(e) => {
+          e.stopPropagation();
+          context.setModal();
+        }}
+        className="icon remove"
+      />
     </div>
   );
 }

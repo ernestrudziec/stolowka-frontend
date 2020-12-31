@@ -26,26 +26,25 @@ export default function useAuth() {
 
   const execute = () => {
     setAuthStatus('pending');
-    console.log('pending');
+    // console.log('pending');
 
     if (sessionStorage.getItem('accessToken') && sessionStorage.getItem('accessToken') !== 'undefined') {
       const expirationDate = moment.unix(parseJWT(sessionStorage.getItem('accessToken')).exp);
       const currentTime = moment().add(5, 'seconds');
 
-      console.log('time: ' + currentTime.format('HH:mm:ss') + ' - ' + 'exp: ' + expirationDate.format('HH:mm:ss'));
+      // console.log('time: ' + currentTime.format('HH:mm:ss') + ' - ' + 'exp: ' + expirationDate.format('HH:mm:ss'));
 
       if (moment(currentTime) < moment(expirationDate)) {
         setAuthStatus('success');
         setIsAuth(true);
-        console.log('auth ok');
+        // console.log('auth ok');
       } else {
         refreshToken();
-        console.log('nope');
+        // console.log('nope');
       }
     } else {
       setIsAuth(false);
       setAuthStatus('success');
-
       logout(history);
     }
   };

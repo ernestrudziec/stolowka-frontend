@@ -11,13 +11,13 @@ export default function AdminDesktopView() {
     getTree();
   }, []);
 
-  useEffect(() => {
-    console.log(getTreeStatus);
+  // useEffect(() => {
+  //   console.log(getTreeStatus);
 
-    if (getTreeStatus === 'success') {
-      console.log(getTreeData);
-    }
-  }, [getTreeStatus]);
+  //   if (getTreeStatus === 'success') {
+  //     console.log(getTreeData);
+  //   }
+  // }, [getTreeStatus]);
 
   return (
     <div className="admin-desktop-view">
