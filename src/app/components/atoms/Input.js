@@ -17,7 +17,7 @@ const Error = ({ type }) => {
 
 export default function Input({ name, label, placeholder, register, errors }) {
   useEffect(() => {
-    console.log(errors);
+    // console.log(errors);
   }, [errors]);
 
   return (

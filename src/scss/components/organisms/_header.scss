@@ -1,0 +1,52 @@
+.header {
+  position: relative;
+  background: white;
+  height: 8rem;
+  width: 100%;
+  margin-top: 0;
+  padding: 2rem 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
+  z-index: 9;
+
+  .logo-stolowka {
+    position: absolute;
+    left: 15%;
+    top: 1.5rem;
+
+    @include XGA {
+      font-size: 2rem;
+    }
+  }
+
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .info-container {
+    position: absolute;
+    bottom: -80%;
+    background: $c-dark-primary;
+    color: white;
+    border-radius: 20px;
+    width: 80%;
+    padding: 1.5rem 5%;
+    max-width: 800px;
+
+    h2 {
+      color: $c-orange;
+      font-size: 1.25rem;
+      margin: 0;
+      margin-bottom: 1.25rem;
+    }
+    p {
+      font-weight: 500;
+      margin: 0.25rem 0;
+    }
+  }
+}

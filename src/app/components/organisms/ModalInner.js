@@ -3,18 +3,21 @@ import { GlobalContext } from '../../context/context';
 import ManageTreeElementModal from '../molecules/modals/ManageTreeElementModal';
 import { MODALS } from '../molecules/modals/modals';
 
-export default function ModalInner({ currentModal }) {
+export default function ModalInner({ currentModal, itemID, updateFunction }) {
   let inner = <ManageTreeElementModal />;
 
   useEffect(() => {
-    console.log(currentModal);
+    // console.log(currentModal);
   }, []);
 
   switch (currentModal) {
     case MODALS.ADD_CITY:
     case MODALS.ADD_GROUP:
     case MODALS.ADD_UNIT:
-      inner = <ManageTreeElementModal type={currentModal} />;
+    case MODALS.DELETE_CITY:
+    case MODALS.DELETE_GROUP:
+    case MODALS.DELETE_UNIT:
+      inner = <ManageTreeElementModal type={currentModal} itemID={itemID} />;
       break;
     default:
       inner = <h2 className="orange">404 - modal nie istnieje</h2>;

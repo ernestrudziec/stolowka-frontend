@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import ModalInner from './ModalInner';
-import closeIconSVG from '../../../assets/icons/close-icon.svg';
+import { default as CloseIconSVG } from '../../../assets/icons/close-icon.svg';
 import ReactModal from 'react-modal';
+import { isMobile } from 'react-device-detect';
 
-export default function Modal({ isModalOpen, currentModal, closeModal }) {
+import useWindowSize from '../../Hooks/useWindowSize';
+import { updateLocale } from 'moment';
+
+export default function Modal({ isModalOpen, currentModal, closeModal, itemID, updateFunction }) {
   ReactModal.setAppElement('#root');
 
   useEffect(() => {
     if (isModalOpen) {
       document.body.style.overflow = 'hidden';
-      document.body.style.paddingRight = '10px';
+      if (!isMobile) {
+        document.body.style.paddingRight = '10px';
+      }
     } else {
       setTimeout(() => {
         document.body.style.overflow = 'unset';
         document.body.style.paddingRight = '0px';
-      }, 200);
+      }, 300);
     }
   }, [isModalOpen]);
 
@@ -34,12 +40,12 @@ export default function Modal({ isModalOpen, currentModal, closeModal }) {
         beforeClose: 'overlay_before-close'
       }}
       shouldCloseOnOverlayClick={true}
-      closeTimeoutMS={500}
+      closeTimeoutMS={300}
     >
       <button className="close-btn" onClick={closeModal}>
-        <img src={closeIconSVG} alt="close" />
+        <img src={CloseIconSVG} />
       </button>
-      <ModalInner currentModal={currentModal} />
+      <ModalInner currentModal={currentModal} itemID={itemID} updateFunction={updateFunction} />
     </ReactModal>
   );
 }

@@ -1,29 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ACTIONS } from '../../actions/actions';
 import { useAsync } from '../../Hooks/useAsync';
 import { Collapse } from 'react-collapse';
 import Tree from '../../components/organisms/Tree';
+import { TreeContext } from '../../context/context';
+import { compareJSON } from '../../helpers/getObjectDiff';
+import NavigationBar from '../../components/organisms/NavigationBar';
+import Logo from '../../components/atoms/Logo';
+import Header from '../../components/organisms/Header';
 
-export default function AdminDesktopView() {
-  const [getTree, getTreeStatus, getTreeError, getTreeData] = useAsync(ACTIONS.GET_MAIN_TREE);
-
-  useEffect(() => {
-    getTree();
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(getTreeStatus);
-
-  //   if (getTreeStatus === 'success') {
-  //     console.log(getTreeData);
-  //   }
-  // }, [getTreeStatus]);
-
+export default function AdminDesktopView({ treeData, treeStatus }) {
   return (
-    <div className="admin-desktop-view">
-      <div className="container">
-        <Tree treeData={getTreeData} treeStatus={getTreeStatus} />
-      </div>
+    <div className="container">
+      <Tree treeData={treeData} treeStatus={treeStatus} />
     </div>
   );
 }

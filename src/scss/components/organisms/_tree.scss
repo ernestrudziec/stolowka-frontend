@@ -1,5 +1,17 @@
 $tree-spacing: 4rem;
 
+@keyframes onShow {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .tree {
   display: flex;
   justify-content: center;
@@ -9,6 +21,9 @@ $tree-spacing: 4rem;
   position: relative;
   z-index: 0;
   max-width: 800px;
+  // opacity: 0;
+  // animation: onShow 0.3s ease-in-out;
+  // animation-fill-mode: forwards;
 
   .element {
     padding: 0 1rem;
@@ -24,6 +39,9 @@ $tree-spacing: 4rem;
     align-items: center;
     margin-left: auto;
     transition: 0.3s all;
+    animation: onShow 0.3s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
 
     .name {
       position: relative;

@@ -6,4 +6,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  .buttons-container {
+    &.decide {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .btn {
+        width: 48%;
+      }
+    }
+  }
 }

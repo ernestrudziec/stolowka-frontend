@@ -15,6 +15,8 @@
 @import 'components/organisms/tree';
 @import 'components/organisms/modal';
 @import 'components/organisms/modal-inner';
+@import 'components/organisms/navigation-bar';
+@import 'components/organisms/header';
 
 @import 'views/guest-view';
-@import 'views/desktop-view';
+@import 'views/admin-view';

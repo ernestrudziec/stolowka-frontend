@@ -11,16 +11,22 @@ import React, { useState } from 'react';
 import Modal from './app/components/organisms/Modal';
 
 export default function Root() {
-  const [isModalOpen, currentModal, closeModal, setModal] = useModal();
+  const [isModalOpen, currentModal, closeModal, setModal, itemID, updateFunction] = useModal();
 
   return (
     <>
-      <GlobalContext.Provider value={{ closeModal, setModal, isModalOpen, currentModal }}>
+      <GlobalContext.Provider value={{ closeModal, setModal, isModalOpen, currentModal, itemID, updateFunction }}>
         <Switch>
           <GuestRoute path="/" exact render={(props) => <GuestView />} />
           <PrivateRoute path="/pulpit" exact render={(props) => <DesktopView />} />
         </Switch>
-        <Modal currentModal={currentModal} isModalOpen={isModalOpen} closeModal={closeModal} />
+        <Modal
+          currentModal={currentModal}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+          itemID={itemID}
+          updateFunction={updateFunction}
+        />
       </GlobalContext.Provider>
     </>
   );

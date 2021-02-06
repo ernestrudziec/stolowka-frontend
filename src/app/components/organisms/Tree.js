@@ -4,19 +4,15 @@ import AddTreeElementBar from '../atoms/Tree/AddTreeElementBar';
 import TreeElementBar from '../atoms/Tree/TreeElementBar';
 
 const TreeElementGroup = ({ group, isBranchCollapsed }) => {
-  // useEffect(() => {
-  //   console.log(group);
-  // }, []);
+  useEffect(() => {
+    // console.log(group);
+  }, []);
 
-  return <TreeElementBar type={'GROUP'} name={group.name} />;
+  return <TreeElementBar itemID={group.id} type={'GROUP'} name={group.name} />;
 };
 
 const TreeElementUnit = ({ unit, isBranchCollapsed }) => {
   const [isOpened, setIsOpened] = useState(false);
-
-  // useEffect(() => {
-  //   console.log(unit);
-  // }, []);
 
   useEffect(() => {
     if (isBranchCollapsed === false) {
@@ -26,13 +22,19 @@ const TreeElementUnit = ({ unit, isBranchCollapsed }) => {
 
   return (
     <>
-      <TreeElementBar isOpened={isOpened} onClick={() => setIsOpened(!isOpened)} name={unit.name} type={'UNIT'} />
+      <TreeElementBar
+        itemID={unit.id}
+        isOpened={isOpened}
+        onClick={() => setIsOpened(!isOpened)}
+        name={unit.name}
+        type={'UNIT'}
+      />
 
       <Collapse isOpened={isOpened}>
         {unit?.groups.map((group) => {
-          return <TreeElementGroup group={group} />;
+          return <TreeElementGroup key={group.id + 'city'} id={group.id} group={group} />;
         })}
-        <AddTreeElementBar type={'GROUP'} />
+        <AddTreeElementBar itemID={unit.id} type={'GROUP'} />
       </Collapse>
     </>
   );
@@ -41,14 +43,24 @@ const TreeElementUnit = ({ unit, isBranchCollapsed }) => {
 const TreeElementCity = ({ city }) => {
   const [isOpened, setIsOpened] = useState(false);
 
+  useEffect(() => {
+    // console.log(city);
+  }, []);
+
   return (
     <>
-      <TreeElementBar isOpened={isOpened} onClick={() => setIsOpened(!isOpened)} type={'CITY'} name={city.city} />
+      <TreeElementBar
+        itemID={city.id}
+        isOpened={isOpened}
+        onClick={() => setIsOpened(!isOpened)}
+        type={'CITY'}
+        name={city.city}
+      />
       <Collapse isOpened={isOpened}>
-        {city?.units.map((unit) => {
-          return <TreeElementUnit isBranchCollapsed={isOpened} unit={unit} />;
+        {city?.units.map((unit, index) => {
+          return <TreeElementUnit key={index + 'unit'} isBranchCollapsed={isOpened} unit={unit} />;
         })}
-        <AddTreeElementBar type={'UNIT'} />
+        <AddTreeElementBar itemID={city.id} type={'UNIT'} />
       </Collapse>
     </>
   );
@@ -60,12 +72,12 @@ export default function Tree({ treeData, treeStatus }) {
       {treeStatus === 'success' ? (
         <>
           {treeData?.map((city) => {
-            return <TreeElementCity city={city} />;
+            return <TreeElementCity key={city.id + 'city'} id={city.id} city={city} />;
           })}
           <AddTreeElementBar type={'CITY'} />
         </>
       ) : (
-        <div>Tree loading</div>
+        <div>Proszę czekać...</div>
       )}
     </div>
   );

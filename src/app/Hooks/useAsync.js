@@ -3,22 +3,38 @@ import { useHistory } from 'react-router';
 import { ACTIONS } from '../actions/actions.js';
 import logout from '../helpers/logout';
 
-export const useAsync = (action) => {
+export const useAsync = (action, itemID) => {
   const [status, setStatus] = useState('idle');
   const [error, setError] = useState(false);
   const [data, setData] = useState(null);
+
+  const ENDPOINT = () => {
+    if (action.url.includes(':id')) {
+      return action.url.replace(':id', itemID);
+    } else {
+      return action.url;
+    }
+  };
 
   const history = useHistory();
 
   const execute = async (payload) => {
     setStatus('pending');
 
-    fetch(`${process.env.REACT_APP_API_URL + action.url}`, {
-      method: action.method,
-      headers: {
-        'Content-Type': 'application/json',
+    let headers = {
+      'Content-Type': 'application/json',
+      Authorization: action.auth ? 'Bearer ' + sessionStorage.getItem('accessToken') : null
+    };
+
+    if (action.method === 'DELETE') {
+      headers = {
         Authorization: action.auth ? 'Bearer ' + sessionStorage.getItem('accessToken') : null
-      },
+      };
+    }
+
+    fetch(`${process.env.REACT_APP_API_URL + ENDPOINT()}`, {
+      method: action.method,
+      headers: headers,
       body: JSON.stringify(payload)
     })
       .then((res) => res.json())

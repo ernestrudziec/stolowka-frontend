@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { ACTIONS } from '../actions/actions';
 
 import { useAsync } from '../Hooks/useAsync';
-import AdminDesktopView from './Administrator/AdminDesktopView';
+import AdminView from './Administrator/AdminView';
 
 export default function DesktopView() {
-  return <AdminDesktopView />;
+  return <AdminView />;
 }
