@@ -6,8 +6,168 @@
   background: $c-orange;
   min-height: 100vh;
   padding: 3rem 0;
+  overflow-x: hidden;
 
   .container {
     width: 80%;
+    animation: onShow 0.5s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  .admin-desktop-view {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      flex-direction: row;
+      max-width: 900px;
+
+      @include vHD {
+        padding: 0 5%;
+      }
+
+      @include XGA {
+        padding: 0;
+      }
+
+      .item {
+        width: calc(40% - 1rem);
+        height: calc(40vw - 1rem);
+        background: white;
+        margin: 0.5rem;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+        font-weight: 600;
+        line-height: 1.5;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        position: relative;
+        box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+        transition: 0.3s all;
+
+        @include vHD {
+          margin: 1rem;
+          width: calc(33.3% - 2rem);
+          height: calc(27vw - 2rem);
+        }
+
+        @include XGA {
+          margin: 1rem;
+          width: calc(300px - 5rem);
+          height: calc(300px - 5rem);
+        }
+
+        &:before {
+          position: absolute;
+          left: 5%;
+          right: 5%;
+          bottom: 5%;
+          top: 5%;
+          border-radius: 15px;
+          opacity: 0;
+          border-top: solid 2px $c-orange;
+          content: '';
+          z-index: 9;
+          transition: 0.05s all ease-in;
+          transform: translateX(50%);
+          pointer-events: none;
+          visibility: hidden;
+        }
+
+        &:after {
+          position: absolute;
+          left: 5%;
+          right: 5%;
+          bottom: 5%;
+          top: 5%;
+          border-radius: 15px;
+          opacity: 0;
+          border-bottom: solid 2px $c-orange;
+          content: '';
+          z-index: 9;
+          transition: 0.1s all ease-in;
+          transform: translateX(-50%);
+          visibility: hidden;
+          pointer-events: none;
+        }
+        transform: scale(1);
+
+        &:hover {
+          transform: scale(1.01);
+          transition: 0.3s all;
+
+          &:before {
+            opacity: 1;
+            transition: 0.1s all ease-in;
+            transform: translateX(0%);
+            visibility: visible;
+          }
+
+          &:after {
+            opacity: 1;
+            transition: 0.1s all ease-in;
+            transform: translateX(0%);
+            visibility: visible;
+          }
+        }
+
+        @include vHD {
+          font-size: 0.75rem;
+        }
+        img {
+          margin-bottom: 0.5rem;
+          width: 3rem;
+        }
+
+        .data {
+          display: block;
+          font-size: 2rem;
+          text-transform: none;
+          font-weight: 700;
+        }
+
+        strong {
+          color: $c-orange;
+          font-weight: inherit;
+        }
+
+        &.dark {
+          background: $c-dark-primary;
+          color: white;
+
+          @include vHD {
+            background: white;
+            color: $c-dark-primary;
+          }
+        }
+
+        @include vHD {
+          &:nth-of-type(even) {
+            background: $c-dark-primary;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+
+  .admin-calendar-view {
   }
 }

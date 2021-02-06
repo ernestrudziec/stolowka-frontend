@@ -1,18 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import { ACTIONS } from '../../actions/actions';
-import { useAsync } from '../../Hooks/useAsync';
-import { Collapse } from 'react-collapse';
-import Tree from '../../components/organisms/Tree';
-import { TreeContext } from '../../context/context';
-import { compareJSON } from '../../helpers/getObjectDiff';
-import NavigationBar from '../../components/organisms/NavigationBar';
-import Logo from '../../components/atoms/Logo';
-import Header from '../../components/organisms/Header';
+import React from 'react';
+import PERSON_ICON from '../../../assets/AdminView/Desktop/person.svg';
+import LIST_ICON from '../../../assets/AdminView/Desktop/list.svg';
+import WARNING_ICON from '../../../assets/AdminView/Desktop/warning.svg';
 
-export default function AdminDesktopView({ treeData, treeStatus }) {
+export default function AdminDesktopView() {
   return (
-    <div className="container">
-      <Tree treeData={treeData} treeStatus={treeStatus} />
+    <div className="admin-desktop-view">
+      <div className="container">
+        <div className="item dark">
+          WSZYSTKICH <strong>osób</strong>
+          <span className="data">231</span>
+        </div>
+        <div className="item">
+          WYGENERUJ <strong>HASŁO</strong>
+        </div>
+        <div className="item">
+          <img src={LIST_ICON} />
+          EDYTUJ <strong>JADŁOSPIS I DIETY</strong>
+        </div>
+        <div className="item dark">
+          <img src={PERSON_ICON} />
+          DODAJ <strong>UŻYTKOWNIKA</strong>
+        </div>
+        <div className="item dark">
+          <strong>STAWKA</strong> ZA DZIEŃ
+          <span className="data">7 zł</span>
+        </div>
+        <div className="item">
+          <img src={WARNING_ICON} />
+          ZOBACZ <strong>UWAGI</strong>
+        </div>
+      </div>
     </div>
   );
 }

@@ -16,3 +16,15 @@ $ExpoEaseInOut: cubic-bezier(1, 0, 0, 1);
   padding: 0;
   width: 100%;
 }
+
+@keyframes onShow {
+  0% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

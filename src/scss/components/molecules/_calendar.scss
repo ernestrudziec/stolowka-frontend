@@ -1,0 +1,144 @@
+$cell-size: 2.5rem;
+$cell-margin: 0.2rem;
+$calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
+
+.calendar {
+  background: white;
+  width: 100%;
+  padding: 2rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: $c-dark-primary;
+  border-radius: 20px;
+
+  animation: onShow 0.5s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+
+  @include XGA {
+    height: 600px;
+    width: 600px;
+  }
+
+  .cells-wrapper {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: $calendar-size;
+  }
+  .cell {
+    margin: $cell-margin;
+    background: #eeeeee;
+    width: $cell-size;
+    height: $cell-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+    transition: 0.3s all ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.present {
+      background: #2fd82b;
+      color: white;
+    }
+
+    &.absent {
+      background: #f34a4a;
+      color: white;
+    }
+
+    &.freeday {
+      background: $c-dark-primary;
+      color: white;
+    }
+
+    &.info {
+      background: none;
+    }
+
+    &.weekend {
+      color: #f34a4a;
+      opacity: 0.6;
+      pointer-events: none;
+      background: none;
+    }
+
+    &.today {
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.25);
+    }
+
+    &.another-month {
+      opacity: 0.3;
+      pointer-events: none;
+      background: none;
+    }
+
+    .weekday {
+      position: absolute;
+      bottom: 3px;
+      font-size: 8px;
+    }
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  .inner-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      width: 100%;
+    }
+  }
+
+  .controls-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 2rem 0;
+
+    .arrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: none;
+      border: none;
+      width: 2rem;
+      height: 2rem;
+      cursor: pointer;
+
+      &:focus {
+        border: none;
+        outline: none;
+      }
+    }
+
+    .date {
+      width: 16rem;
+      font-weight: 600;
+      display: flex;
+      font-size: 1.5rem;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+    }
+  }
+}
