@@ -8,49 +8,49 @@ $screen-UXGA: 1590px;
 $screen-FHD: 1910px;
 
 @mixin HVGA {
-	@media screen and (min-width: $screen-HVGA) {
-		@content;
-	}
+  @media screen and (min-width: $screen-HVGA) {
+    @content;
+  }
 }
 
 @mixin VGA {
-	@media screen and (min-width: $screen-VGA) {
-		@content;
-	}
+  @media screen and (min-width: $screen-VGA) {
+    @content;
+  }
 }
 
 @mixin PAL {
-	@media screen and (min-width: $screen-PAL) {
-		@content;
-	}
+  @media screen and (min-width: $screen-PAL) {
+    @content;
+  }
 }
 
 @mixin vHD {
-	@media screen and (min-width: $screen-vHD) {
-		@content;
-	}
+  @media screen and (min-width: $screen-vHD) {
+    @content;
+  }
 }
 
 @mixin XGA {
-	@media screen and (min-width: $screen-XGA) {
-		@content;
-	}
+  @media screen and (min-width: $screen-XGA) {
+    @content;
+  }
 }
 
 @mixin HD {
-	@media screen and (min-width: $screen-HD) {
-		@content;
-	}
+  @media screen and (min-width: $screen-HD) {
+    @content;
+  }
 }
 
 @mixin UXGA {
-	@media screen and (min-width: $screen-UXGA) {
-		@content;
-	}
+  @media screen and (min-width: $screen-UXGA) {
+    @content;
+  }
 }
 
 @mixin FHD {
-	@media screen and (min-width: $screen-FHD) {
-		@content;
-	}
+  @media screen and (min-width: $screen-FHD) {
+    @content;
+  }
 }

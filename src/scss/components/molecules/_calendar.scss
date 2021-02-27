@@ -1,25 +1,37 @@
-$cell-size: 2.5rem;
+$cell-size: 2rem;
 $cell-margin: 0.2rem;
 $calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
 
+$cell-size-desktop: 2.5rem;
+$cell-margin-desktop: 0.2rem;
+$calendar-size-desktop: calc(#{$cell-size-desktop} * 7 + (#{$cell-margin-desktop} * 14));
+
 .calendar {
   background: white;
-  width: 100%;
-  padding: 2rem 1rem;
+  width: 90%;
+  padding: 0 2rem;
+  padding-bottom: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: $c-dark-primary;
-  border-radius: 20px;
-
+  border-radius: 10px;
   animation: onShow 0.5s;
   animation-fill-mode: forwards;
   opacity: 0;
+  box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.2);
+  margin-top: 1rem;
+
+  @include vHD {
+    padding-bottom: 2rem;
+    padding-top: 0rem;
+  }
 
   @include XGA {
-    height: 600px;
-    width: 600px;
+    height: auto;
+    width: 100%;
+    max-width: 800px;
   }
 
   .cells-wrapper {
@@ -27,7 +39,12 @@ $calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+
     max-width: $calendar-size;
+
+    @include vHD {
+      max-width: $calendar-size-desktop;
+    }
   }
   .cell {
     margin: $cell-margin;
@@ -42,6 +59,12 @@ $calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
     position: relative;
     border-radius: 5px;
     transition: 0.3s all ease;
+
+    @include vHD {
+      margin: $cell-margin-desktop;
+      width: $cell-size-desktop;
+      height: $cell-size-desktop;
+    }
 
     &:hover {
       transform: scale(1.1);
@@ -107,6 +130,10 @@ $calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
       align-items: center;
       padding: 0;
       width: 100%;
+
+      .cell {
+        font-weight: 800 !important;
+      }
     }
   }
 
@@ -132,13 +159,43 @@ $calendar-size: calc(#{$cell-size} * 7 + (#{$cell-margin} * 14));
     }
 
     .date {
-      width: 16rem;
+      width: 14rem;
       font-weight: 600;
       display: flex;
       font-size: 1.5rem;
       display: flex;
       text-align: center;
       justify-content: center;
+    }
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+
+    max-width: 350px;
+    margin: 0rem auto;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+
+    .item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      width: 50%;
+
+      .cell {
+        margin-right: 0.5rem;
+        width: 1.5rem;
+        height: 1.5rem !important;
+      }
+
+      p {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
     }
   }
 }

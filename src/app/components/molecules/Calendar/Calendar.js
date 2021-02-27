@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
 import LEFT_ARROW_ICON from '../../../../assets/AdminView/Calendar/arrow-left.svg';
 import RIGHT_ARROW_ICON from '../../../../assets/AdminView/Calendar/arrow-right.svg';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 export default () => {
   const today = new Date();
@@ -12,6 +13,27 @@ export default () => {
     month: today.getMonth() + 1,
     year: today.getFullYear()
   });
+
+  const [changedDays, setChangedDays] = useState([]);
+
+  const updateChangedDays = (dateString, status) => {
+    const isDayActuallyStored = changedDays.findIndex((item) => {
+      if (item.date == dateString) {
+        return true;
+      } else return false;
+    });
+
+    if (isDayActuallyStored === -1) {
+      setChangedDays([...changedDays, { date: dateString, status: status }]);
+    } else {
+      let array = changedDays;
+
+      array[isDayActuallyStored] = { date: dateString, status: status };
+      setChangedDays(array);
+    }
+
+    console.log(changedDays);
+  };
 
   const getPLMonthName = (monthNumber) => {
     switch (monthNumber) {
@@ -148,85 +170,95 @@ export default () => {
   const isToday = (day, month, year) => {
     const todaysDate = new Date();
 
-    console.log(todaysDate.getMonth() + 1);
-
     if (todaysDate.getDate() == day && todaysDate.getMonth() + 1 == month && todaysDate.getFullYear() == year) {
       return true;
     } else return false;
   };
 
-  const Cell = ({ index }) => {
-    //normal //present // unpresent // freeday
+  const Cell = useMemo(
+    () => ({ index, date, changedDays, setChangedDays, updateChangedDays }) => {
+      //normal //present // unpresent // freeday
 
-    const [status, setStatus] = useState('normal');
+      const [status, setStatus] = useState('normal');
 
-    let day = index + 1;
-    let dayMonthStartsOn = getWeekday(1, date.month, date.year);
-    let correctDay = day - dayMonthStartsOn + 1;
-    let weekdayNumber = getWeekday(correctDay, date.month, date.year);
-    let lastMonthDaysNumber = daysInPreviousMonth(date.month, date.year);
-    let daysInCurrentMonth = daysInMonth(date.month, date.year);
+      let day = index + 1;
+      let dayMonthStartsOn = getWeekday(1, date.month, date.year);
+      let correctDay = day - dayMonthStartsOn + 1;
+      let weekdayNumber = getWeekday(correctDay, date.month, date.year);
+      let lastMonthDaysNumber = daysInPreviousMonth(date.month, date.year);
+      let daysInCurrentMonth = daysInMonth(date.month, date.year);
+      let dateString = `${correctDay}.${date.month < 10 ? '0' + date.month : date.month}.${date.year}`;
 
-    const updateStatus = (day) => {
-      if (status === 'normal') {
-        setStatus('present');
-      } else if (status === 'present') {
-        setStatus('absent');
-      } else if (status === 'absent') {
-        setStatus('freeday');
-      } else {
-        setStatus('normal');
-      }
+      const updateStatus = (day) => {
+        const getStatus = (s) => {
+          if (s === 'normal') {
+            return 'present';
+          } else if (s === 'present') {
+            return 'absent';
+          } else if (s === 'absent') {
+            return 'freeday';
+          } else {
+            return 'normal';
+          }
+        };
 
-      const getStatus = (s) => {
-        if (s === 'normal') {
-          return 'present';
-        } else if (s === 'present') {
-          return 'absent';
-        } else if (s === 'absent') {
-          return 'freeday';
+        updateChangedDays(dateString, getStatus(status));
+
+        if (status === 'normal') {
+          setStatus('present');
+        } else if (status === 'present') {
+          setStatus('absent');
+        } else if (status === 'absent') {
+          setStatus('freeday');
         } else {
-          return 'normal';
+          setStatus('normal');
         }
       };
 
-      let clickedDay = `${day}.${date.month}.${date.year}`;
+      useEffect(() => {
+        changedDays.map((item) => {
+          if (item.date === dateString) {
+            if (status !== item.status) {
+              setStatus(item.status);
+            }
+          }
+        });
+      }, []);
 
-      console.log(clickedDay + ' -> status: ' + getStatus(status));
-    };
-
-    if (day >= dayMonthStartsOn && day <= daysInCurrentMonth + dayMonthStartsOn - 1) {
-      return (
-        <div
-          onClick={() => updateStatus(correctDay)}
-          className={`cell ${isWeekend(day) ? 'weekend' : ''} ${status} ${
-            isToday(correctDay, date.month, date.year) ? 'today' : ''
-          }`}
-        >
-          {correctDay}
-        </div>
-      );
-    } else if (day <= dayMonthStartsOn) {
-      return (
-        <div className={`cell ${isWeekend(day) ? 'weekend' : ''} another-month ${status}`}>
-          {lastMonthDaysNumber + correctDay}
-        </div>
-      );
-    } else {
-      return (
-        <div className={`cell ${isWeekend(day) ? 'weekend' : ''} another-month ${status}`}>
-          {correctDay - daysInMonth(date.month, date.year)}
-        </div>
-      );
-    }
-  };
+      if (day >= dayMonthStartsOn && day <= daysInCurrentMonth + dayMonthStartsOn - 1) {
+        return (
+          <div
+            onClick={() => updateStatus()}
+            className={`cell ${isWeekend(day) ? 'weekend' : ''} ${status} ${
+              isToday(correctDay, date.month, date.year) ? 'today' : ''
+            }`}
+          >
+            {correctDay}
+          </div>
+        );
+      } else if (day <= dayMonthStartsOn) {
+        return (
+          <div className={`cell ${isWeekend(day) ? 'weekend' : ''} another-month ${status}`}>
+            {lastMonthDaysNumber + correctDay}
+          </div>
+        );
+      } else {
+        return (
+          <div className={`cell ${isWeekend(day) ? 'weekend' : ''} another-month ${status}`}>
+            {correctDay - daysInMonth(date.month, date.year)}
+          </div>
+        );
+      }
+    },
+    [date]
+  );
 
   const TopRow = () => {
     return (
       <div className="row">
         <div className="cell info">PN</div>
         <div className="cell info">WT</div>
-        <div className="cell info">SR</div>
+        <div className="cell info">ŚR</div>
         <div className="cell info">CZ</div>
         <div className="cell info">PT</div>
         <div className="cell info weekend">S</div>
@@ -236,8 +268,8 @@ export default () => {
   };
 
   useEffect(() => {
-    console.log(isToday(7, 2, 2021));
-  }, []);
+    console.log(changedDays);
+  }, [changedDays]);
 
   return (
     <div className="calendar">
@@ -245,18 +277,52 @@ export default () => {
         <button onClick={() => goToPreviousMonth()} className="arrow">
           <img src={LEFT_ARROW_ICON} />
         </button>
-        <div className="date">{getPLMonthName(date.month) + ' ' + date.year}</div>
-
+        <SwitchTransition>
+          <CSSTransition key={date.month} timeout={200} classNames="fade-left-to-right">
+            <div className="date">{getPLMonthName(date.month) + ' ' + date.year}</div>
+          </CSSTransition>
+        </SwitchTransition>
         <button onClick={() => goToNextMonth()} className="arrow">
           <img src={RIGHT_ARROW_ICON} />
         </button>
       </div>
-      <div className="inner-wrapper">
-        <TopRow />
-        <div className="cells-wrapper">
-          {[...Array(42)].map((item, index) => {
-            return <Cell index={index} />;
-          })}
+      <SwitchTransition>
+        <CSSTransition key={date.month} timeout={100} classNames="fade">
+          <div className="inner-wrapper">
+            <TopRow />
+            <div className="cells-wrapper">
+              {[...Array(42)].map((item, index) => {
+                return (
+                  <Cell
+                    updateChangedDays={updateChangedDays}
+                    date={date}
+                    changedDays={changedDays}
+                    setChangedDays={setChangedDays}
+                    index={index}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </CSSTransition>
+      </SwitchTransition>
+      <div className="legend">
+        <div className="item">
+          <div className="cell" />
+          <p>czynne</p>
+        </div>
+        <div className="item">
+          <div className="cell today" />
+          <p>dzisiaj</p>
+        </div>
+        <div className="item">
+          <div className="cell freeday" />
+          <p>nieczynne</p>
+        </div>
+
+        <div className="item">
+          <div className="cell present" />
+          <p>posiłki wydane</p>
         </div>
       </div>
     </div>

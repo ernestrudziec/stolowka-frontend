@@ -28,3 +28,47 @@ $ExpoEaseInOut: cubic-bezier(1, 0, 0, 1);
     transform: translateY(0);
   }
 }
+
+.fade-enter {
+  opacity: 0 !important;
+}
+
+.fade-enter-active {
+  opacity: 1 !important;
+}
+
+.fade-exit {
+  opacity: 1 !important;
+}
+
+.fade-exit-active {
+  opacity: 0 !important;
+}
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 200ms $CubicEaseIn !important;
+}
+
+.fade-left-to-right-enter {
+  transform: translateX(-50%) !important;
+  opacity: 0;
+}
+
+.fade-left-to-right-enter-active {
+  transform: translateX(0) !important;
+  opacity: 1;
+}
+
+.fade-left-to-right-exit {
+  opacity: 1;
+  transform: translateX(0) !important;
+}
+
+.fade-left-to-right-exit-active {
+  opacity: 0;
+  transform: translateX(50%) !important;
+}
+.fade-left-to-right-enter-active,
+.fade-left-to-right-exit-active {
+  transition: all 100ms ease !important;
+}
