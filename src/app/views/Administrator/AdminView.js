@@ -11,7 +11,7 @@ import AdminDesktopView from './AdminDesktopView';
 import AdminCalendarView from './AdminCalendarView';
 
 export default function AdminView() {
-  const [activeView, setActiveView] = useState(1);
+  const [activeView, setActiveView] = useState(2);
 
   const view = (activeView) => {
     let view = <AdminDesktopView />;

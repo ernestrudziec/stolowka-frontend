@@ -15,15 +15,16 @@ const Error = ({ type }) => {
   return <span className="error">{copy}</span>;
 };
 
-export default function Input({ name, label, placeholder, register, errors }) {
-  useEffect(() => {
-    // console.log(errors);
-  }, [errors]);
-
+export default function Input({ type, name, label, placeholder, register, errors }) {
   return (
-    <div className="input-wrapper">
+    <div className={`input-wrapper ${type}`}>
       <label>{label}</label>
-      <input name={name} placeholder={placeholder} ref={register({ required: true })} />
+      <input
+        type={name === 'password' ? name : 'text'}
+        name={name}
+        placeholder={placeholder}
+        ref={register({ required: true })}
+      />
       {errors[name] ? <Error type={errors[name].type} /> : null}
     </div>
   );

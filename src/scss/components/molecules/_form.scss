@@ -1,8 +1,74 @@
+.error-box {
+  background: red;
+  color: white;
+  border-radius: 5px;
+  width: 70%;
+  font-size: 0.75rem;
+  line-height: 1.7;
+  padding: 0.5rem;
+  margin-top: 2rem;
+  transition: 0.3s all;
+  font-weight: 600;
+  text-align: center;
+  max-width: 500px;
+  position: fixed;
+  top: 5rem;
+  left: 50%;
+  animation: onShowCenter 0.5s;
+  animation-fill-mode: forwards;
+  box-shadow: 0px 5px 35px rgba(0, 0, 0, 0.5);
+  padding-top: 1.5rem;
+  padding-bottom: 1rem;
+
+  .tip {
+    position: absolute;
+    top: -1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+}
 .form {
   &.primary {
     input {
       border: solid 2px $c-orange;
       color: white;
+      font-size: 1rem;
+    }
+
+    label {
+      color: white;
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .input-wrapper {
+      width: 70%;
+      max-width: 300px;
+
+      @include XGA {
+        width: 100%;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
+
+    button {
+      width: 70%;
+
+      @include XGA {
+        width: 100%;
+      }
     }
   }
 
@@ -33,6 +99,8 @@
   color: red;
   font-size: 0.75rem;
   margin-top: 0.5rem;
+  position: absolute;
+  bottom: -1.25rem;
 }
 
 input {

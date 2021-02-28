@@ -4,9 +4,13 @@ import Logo from '../atoms/Logo';
 import LOGOUT_ICON from '../../../assets/icons/logout.svg';
 import CLOSE_ICON from '../../../assets/icons/close-icon.svg';
 import { isMobile } from 'react-device-detect';
+import logout from '../../helpers/logout';
+import { useHistory } from 'react-router';
 
 const Header = () => {
   const [isOpened, setIsOpened] = useState(false);
+
+  const history = useHistory();
 
   const toggleHeader = () => {
     setIsOpened(true);
@@ -32,7 +36,7 @@ const Header = () => {
       <div className={`sidenav ${isOpened ? '' : 'hide'}`}>
         <img className="close-btn" src={CLOSE_ICON} onClick={() => setIsOpened(false)} alt="close" />
 
-        <button className="logout-button">
+        <button className="logout-button" onClick={() => logout(history)}>
           Wyloguj się <img src={LOGOUT_ICON} alt="logout" />
         </button>
       </div>

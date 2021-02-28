@@ -1,6 +1,12 @@
 .logo-stolowka {
   margin: 0.5rem 0;
   font-size: 2rem;
+  cursor: pointer;
+  transition: 0.5s all ease-in;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   @include XGA {
     font-size: 3rem;

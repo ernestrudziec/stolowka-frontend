@@ -55,6 +55,8 @@
       }
 
       .wrapper-main {
+        width: 100%;
+
         @include XGA {
           display: flex;
           flex-direction: row;

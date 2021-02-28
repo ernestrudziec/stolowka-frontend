@@ -1,4 +1,4 @@
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import useAuth from './app/Hooks/useAuth';
 import PrivateRoute from './app/Routes/PrivateRoute';
 import GuestRoute from './app/Routes/GuestRoute';
@@ -9,9 +9,11 @@ import { GlobalContext } from './app/context/context';
 import useModal from './app/Hooks/useModal';
 import React, { useState } from 'react';
 import Modal from './app/components/organisms/Modal';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
 
 export default function Root() {
   const [isModalOpen, currentModal, closeModal, setModal, itemID, updateFunction] = useModal();
+  const location = useLocation();
 
   return (
     <>

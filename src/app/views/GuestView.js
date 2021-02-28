@@ -6,7 +6,8 @@ import OrangeBackground from '../../assets/GuestView/bg-orange.jpeg';
 import { useAsync } from '../Hooks/useAsync.js';
 import { ACTIONS } from '../actions/actions';
 import { useHistory } from 'react-router-dom';
-
+import { FORMS } from '../components/molecules/forms/forms';
+import Form from '../components/molecules/forms/Form';
 export default function GuestView() {
   const [login, loginStatus, loginError, loginData] = useAsync(ACTIONS.LOGIN_USER);
 
@@ -16,15 +17,18 @@ export default function GuestView() {
     if (loginStatus === 'success') {
       sessionStorage.setItem('accessToken', loginData.access);
       sessionStorage.setItem('refreshToken', loginData.refresh);
-
+      console.log(loginData);
       history.push('/pulpit');
     }
   }, [loginStatus]);
 
+  useEffect(() => {
+    console.log(loginError);
+  }, [loginError]);
+
   return (
     <div className="guest-view">
       <img className="bg-orange" src={OrangeBackground} alt="bg-orange" />
-
       <div className="container">
         <div className="dark-box">
           <Logo />
@@ -33,31 +37,7 @@ export default function GuestView() {
               <PersonIcon className="icon" />
               <p className="f-white bold">Logowanie do systemu</p>
             </div>
-            <div className="form-wrapper">
-              <form>
-                <div className="input-wrapper">
-                  <label className="bold">NAZWA UŻYTKOWNIKA:</label>
-                  <input className="primary" type="text" />
-                </div>
-                <div className="input-wrapper">
-                  <label className="bold">HASŁO:</label>
-                  <input className="primary" type="password" />
-                </div>
-                <button
-                  className="btn btn-orange"
-                  type="submit"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    login({
-                      username: 'admin',
-                      password: 'haselkomaselko'
-                    });
-                  }}
-                >
-                  ZALOGUJ SIĘ
-                </button>
-              </form>
-            </div>
+            <Form type={FORMS.LOGIN_USER} request={login} requestStatus={loginStatus} requestError={loginError} />
           </div>
         </div>
       </div>

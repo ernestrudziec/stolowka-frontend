@@ -1,14 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { GlobalContext, TreeContext } from '../../../context/context';
 import { useAsync } from '../../../Hooks/useAsync';
-import useFormCustom from '../../../Hooks/useForm';
 import { ACTIONS } from '../../../actions/actions';
+import Form from '../../molecules/forms/Form';
 
 export default function ManageTreeElementModal({ type, itemID }) {
-  const [Form, formStatus, formData] = useFormCustom(type, itemID);
-
   const [request, requestStatus, requestError, responseData] = useAsync(ACTIONS[type], itemID);
-
   const context = useContext(GlobalContext);
 
   const getCopy = (type) => {
@@ -26,32 +23,27 @@ export default function ManageTreeElementModal({ type, itemID }) {
   };
 
   useEffect(() => {
-    if (formStatus === 'success') {
-      // console.log('success');
-      context.updateFunction.updateFunction();
-      context.closeModal();
-    }
-  }, [formStatus]);
-
-  useEffect(() => {
     if (requestStatus === 'success') {
-      console.log('success');
       context.updateFunction.updateFunction();
       context.closeModal();
     }
   }, [requestStatus]);
 
   if (type.includes('ADD')) {
+    //ADD ELEMENT OF THE TREE ------------------------------------------
+
     return (
       <>
         <h2>
           <span className="f-orange">Dodaj</span>
           {' ' + getCopy(type)}
         </h2>
-        <Form />
+        <Form request={request} type={type} itemID={itemID} />
       </>
     );
   } else {
+    //DELETE ELEMENT OF THE TREE ----------------------------------------
+
     return (
       <>
         <h2>

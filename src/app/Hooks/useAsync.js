@@ -8,6 +8,8 @@ export const useAsync = (action, itemID) => {
   const [error, setError] = useState(false);
   const [data, setData] = useState(null);
 
+  let responseStatus = 400;
+
   const ENDPOINT = () => {
     if (action.url.includes(':id')) {
       return action.url.replace(':id', itemID);
@@ -37,7 +39,10 @@ export const useAsync = (action, itemID) => {
       headers: headers,
       body: JSON.stringify(payload)
     })
-      .then((res) => res.json())
+      .then((res) => {
+        responseStatus = res.status;
+        return res.json();
+      })
       .then((res) => {
         if (res?.code === 'token_not_valid' && action.name !== 'REFRESH_TOKEN') {
           fetch(`${process.env.REACT_APP_API_URL + ACTIONS.REFRESH_TOKEN.url}`, {
@@ -47,10 +52,12 @@ export const useAsync = (action, itemID) => {
             },
             body: JSON.stringify({ refresh: sessionStorage.getItem('refreshToken') })
           })
-            .then((res) => res.json())
+            .then((res) => {
+              responseStatus = res.status;
+              return res.json();
+            })
             .then((res) => {
               if (res.access) {
-                // console.log('ACCESS GET');
                 sessionStorage.setItem('accessToken', res.access);
                 execute(payload);
               } else {
@@ -61,8 +68,16 @@ export const useAsync = (action, itemID) => {
         } else if (res?.code === 'token_not_valid' && action.name === 'REFRESH_TOKEN') {
           logout(history);
         } else {
-          setData(res);
-          setStatus('success');
+          if (responseStatus == 200) {
+            setData(res);
+            setStatus('success');
+          } else if (res.detail) {
+            setError(res.detail);
+            setStatus('error');
+          } else {
+            setError('Ups! Coś poszło nie tak. Wystąpił nieznany błąd.');
+            setStatus('error');
+          }
         }
       })
       .catch((error) => {

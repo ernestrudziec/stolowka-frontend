@@ -107,3 +107,14 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
   background: rgba($color: $c-dark-primary, $alpha: 0.9);
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(253, 177, 11) inset !important;
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: #131313 !important;
+}
